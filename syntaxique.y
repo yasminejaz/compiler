@@ -1,6 +1,10 @@
 %{
 #include<stdio.h>
-Extern File *yyin;
+#include<stdlib.h>
+extern FILE* yyin;
+int yylex();
+int yyerror();
+int yyparse();
 %}
 
 
@@ -11,55 +15,14 @@ int entier;
 float reel;
 }
 
-%token	key_program
-%token	key_begin
-%token	key_end
-%token	key_var
-%token	key_integer
-%token	key_float
-%token	key_char
-%token	key_string
-%token	key_const
-%token	key_let
-%token	key_return
-%token	key_if
-%token	key_else
-%token	key_end_if
-%token	key_for
-%token	key_end_for
-%token	key_show
-%token	key_get
-%token	key_kaddition
-%token	key_soustraction
-%token	key_deux_points
-%token	key_affectation
-%token	key_point
-%token	key_multiplication	
-%token	key_division
-%token	key_commentaire
-%token	key_superieur
-%token	key_inferieur
-%token	key_egal
-%token	key_supegal
-%token	key_infegal
-%token	key_different
-%token	key_fin
-%token	key_barre
-%token	key_parouv
-%token	key_parfer
-%token	key_apostrophe
-%token	key_blanc
-%token	key_guillemets
-%token	key_accouv
-%token	key_accfer
-%token	key_saut_de_ligne
-%token	key_tabulation
+%token	key_program	key_begin	key_end	key_var	key_integer	key_float	key_char	key_string	key_const	key_let	key_return	key_if	key_else	key_end_if	key_for	key_end_for	key_show	key_get	key_kaddition	key_soustraction	key_deux_points	key_affectation	key_point	key_multiplication		key_division	key_commentaire	key_superieur	key_inferieur	key_egal	key_supegal	key_infegal	key_different	key_fin	key_barre	key_parouv	key_parfer	key_apostrophe	key_blanc	key_guillemets	key_accouv	key_accfer	key_saut_de_ligne	key_tabulation
+
 %token	<chaine> idf
 %token	<entier> cste_entier
 %token	<car>	cste_char
 %token	<reel>	cste_reel
 %token	<chaine> cste_string
-
+%start S
 %left key_addition key_soustraction
 %left key_multiplication key_division
 %left key_superieur key_supegal key_egal key_different key_infegal key_inferieur
@@ -112,13 +75,12 @@ ES				: ES key_get key_parouv key_inferieur cste_string key_superieur key_deux_p
 
 Exp 			: Exp_Arithm
 				| Cond
-				| Exp_log
 				| Cste
-;
+				;
 				
 Exp_Arithm		: Exp_Arithm key_addition Exp_Arithm1
 				| Exp_Arithm1
-;
+				;
 Exp_Arithm1		: Exp_Arithm1 key_soustraction Exp_Arithm2
 				| Exp_Arithm2
 				;
@@ -196,9 +158,10 @@ Cond_if       		: key_if Cond accouv Inst Inst key_return key_parouv key_idf par
 
 %%
 
-1
+
 
 int main(){
   
 	yyin=fopen("test1.txt","r");
 	yyparse();
+}
