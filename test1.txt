@@ -1,0 +1,22 @@
+PROGRAM Acadl3compil
+var Acadal3 || Compil : FLOAT £
+var TPL3 : INTEGER £
+let NbEtud : FLOAT = 20 £
+BEGIN 
+$
+FOR(i : 1: i <<= NbEtud)
+      IF(i <<>> 1)
+      { 
+		Compil = AcadAL3 * ( 5+ TPL3) £
+		RETURN (Compil)£
+	}
+	ELSE
+	{
+		Compil = AcadAL3 - 6 £ %
+		RETURN (Compil) %
+	
+	}
+	END_IF
+
+END_FOR
+END
